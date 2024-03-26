@@ -3,6 +3,10 @@ from django.http import JsonResponse,HttpResponse
 import pyrebase
 from rest_framework.decorators import *
 import json
+from rest_framework.authentication import TokenAuthentication
+import secrets
+from rest_framework.permissions import IsAuthenticated
+
 
 # Create your views here.
 
@@ -21,32 +25,35 @@ firebase=pyrebase.initialize_app(config=config)
 db=firebase.database()
 auth=firebase.auth()
 
-@api_view(['GET','POST'])
+@api_view(['POST'])
+
 def login(request):
+   
+    output = {'auth': False}
     
     try:
         if request.method=="POST":
-           data=request.data
-        #    data_dict = json.loads(data)
-           
-           email = data[0][0]
-           password = data[0][1]
+           email=request.data.get('email')
+           password=request.data.get('password')
 
            print(email,password)
 
            auth1=auth.sign_in_with_email_and_password(email,password)
            print(auth1)
 
+           
            output={
+               
                'auth': True,
            }
 
 
     except Exception as e:
+        
         print(e)
-        output={
-            'auth':False
-        }
+       
+       
 
     finally:
         return JsonResponse(output)
+    
