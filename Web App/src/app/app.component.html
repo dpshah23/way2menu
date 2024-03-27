@@ -3,6 +3,6 @@
   <h2>{{welcome}}</h2>
   <br><br>
   <router-outlet></router-outlet>
-  <button (click)="login()">Login</button>
-  <button (click)="signup()">Signup</button>
+  <input type="button" value="Login" *ngIf="isButtonVisible" (click)="login()" />
+  <input type="button" value="Signup" *ngIf="isButtonVisible" (click)="signup()" />
 </div>
