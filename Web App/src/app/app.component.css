@@ -3,6 +3,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+.container {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 .background-image {
     background-image: url('../assets/WAY 2 MENU.jpg');
     background-size: cover;
