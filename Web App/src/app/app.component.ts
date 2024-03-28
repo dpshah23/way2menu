@@ -8,9 +8,8 @@ import { DataService } from '../app/data.service';
 })
 export class AppComponent implements OnInit {
   title = 'w2m';
-  email:string='';
-  password:string='';
-  greet:string='';
+  email='';
+  password='';
   constructor(private dataService: DataService) { }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
