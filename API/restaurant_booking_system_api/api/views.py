@@ -74,14 +74,15 @@ def menu(request):
     password="way2menu@2172987539319"
     auth=firebase.auth()
     user=auth.sign_in_with_email_and_password(email,password)
-    restaurant_name=request.get('restaurantnm')
-    tableno=request.get('tableno')
-    restaurant_id=request.get('restaurant_id')
-    menu= db.child("menus").child('restaurant_id').order_by_child("restaurant_id").equal_to(restaurant_id).get(token=user['idToken'])
-    data=menu.val()
+    restaurant_name=request.GET['restaurantnm']
+    tableno=request.GET['tableno']
+    restaurant_id=request.GET['restaurant_id']
+    menu_ref = db.child("menus")
+    menu_snapshot = menu_ref.child(restaurant_id).get(token=user['idToken'])
+    menu_data = menu_snapshot.val()
 
 
-    return JsonResponse(data)
+    return JsonResponse(menu_data)
 
 
 @api_view(['GET'])
@@ -90,13 +91,13 @@ def addmenu(request):
     password="way2menu@2172987539319"
     auth=firebase.auth()
     user=auth.sign_in_with_email_and_password(email,password)
-    restaurant_id=request.get('restaurant_id')
-    restaurnant_name=request.get('restaurant_name')
-    title=request.get('title')
-    desc=request.get('desc')
-    price=request.get('price')
-    imgurl=request.get('imgurl')
-    isspecial=request.get('isspecial')
+    restaurant_id=request.GET['restaurant_id']
+    restaurnant_name=request.GET['restaurant_name']
+    title=request.GET['title']
+    desc=request.GET['desc']
+    price=request.GET['price']
+    imgurl=request.GET['imgurl']
+    isspecial=request.GET['isspecial']
 
     data={
         "title":title,
@@ -120,16 +121,17 @@ def addmenu(request):
 
 @api_view(['GET'])
 def add_restaurant(request):
-    restaurant_name=request.get('restaurant_name')
-    address=request.get('address')
-    mobile=request.get('mobile')
-    range=request.get('range')
+    restaurant_name=request.GET['restaurant_name']
+    address=request.GET['address']
+    mobile=request.GET['mobile']
+    range=request.GET['range']
     time=datetime.datetime.now()
-    gstno=request.get('gstno')
+    gstno=request.GET['gstno']
     restaurant_id=random.randint(00000,99999)
-    email=request.get('email')
-    password=request.get('password')
-    active=request.get('active')
+    email=request.GET['email']
+    password=request.GET['password']
+    active=request.GET['active']
+    time=str(time)
 
     data={
         'restaurant_name':restaurant_name,
