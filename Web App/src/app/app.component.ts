@@ -7,26 +7,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'w2m';
-  welcome="Welcome to WAY 2 MENU";
-  static isButtonVisible = true;
+  email='';
+  password='';
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-
-  login() {
-    this.welcome="";
-    AppComponent.isButtonVisible=false;
-    this.router.navigate(['/login']);
-  }
-  signup() {
-    this.welcome="";
-    AppComponent.isButtonVisible=false;
-    this.router.navigate(['/signup']);
-  }
-  get isButtonVisible() {
-    return AppComponent.isButtonVisible;
-  }
+  //routing functions if needed
 }
 
 
