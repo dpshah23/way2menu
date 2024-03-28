@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const dataToSend = {email:this.email,password:this.password};
-    this.dataService.sendData(dataToSend).subscribe((response: any) => {
+    this.dataService.sendData(dataToSend).subscribe(response => {
       console.log(response); // Handle the response from the API
     });
   }
