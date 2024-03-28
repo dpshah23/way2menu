@@ -1,7 +1,8 @@
 
 <div>
-  <h2>{{welcome}}</h2>
+  <h2>WAY 2 MENU!</h2>
   <br><br>
-  <router-outlet></router-outlet>
-  <input type="button" value="Login" *ngIf="isButtonVisible" (click)="login()" />
+  <input type="email" placeholder="email address or username" [(ngModel)]="email"><br><br>
+  <input type="password" placeholder="password" [(ngModel)]="password"><br><br>
+  <button type="submit">Log in</button>
 </div>
