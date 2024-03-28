@@ -55,5 +55,61 @@ def login(request):
        
 
     finally:
-        return JsonResponse(output)
-    
+        return JsonResponse (output)
+
+@api_view(['GET'])
+def signup(request):
+    if request.method=='GET':
+        email=request.get('email')
+        password=request.get('password')
+
+
+    pass
+
+
+@api_view(['GET'])
+def menu(request):
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
+    auth=firebase.auth()
+    user=auth.sign_in_with_email_and_password(email,password)
+    restaurant_name=request.get('restaurantnm')
+    tableno=request.get('tableno')
+    restaurant_id=request.get('restaurant_id')
+    menu= db.child("menus").child('restaurant_id').order_by_child("restaurant_id").equal_to(restaurant_id).get(token=user['idToken'])
+    data=menu.val()
+
+
+    return JsonResponse(data)
+
+
+@api_view(['GET'])
+def addmenu(request):
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
+    auth=firebase.auth()
+    user=auth.sign_in_with_email_and_password(email,password)
+    restaurant_id=request.get('restaurant_id')
+    restaurnant_name=request.get('restaurant_name')
+    title=request.get('title')
+    desc=request.get('desc')
+    price=request.get('price')
+    imgurl=request.get('imgurl')
+    isspecial=request.get('isspecial')
+
+    data={
+        "title":title,
+        "description":desc,
+        "price":price,
+        "imgurl":imgurl,
+        "special":isspecial
+    }
+
+    db=firebase.database()
+
+    addmenudata=db.child('menus').child(restaurant_id).child(title).set(data,token=user['idToken'])
+
+
+@api_view(['GET'])
+def add_restaurant(request):
+    pass
