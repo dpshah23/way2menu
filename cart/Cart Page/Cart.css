@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E9D9C9;
+    border-bottom: 3px solid black;
+    gap: 80rem;
+}
+
+.image {
+    height: 9rem;
+    width: 9rem;
+}
+
+.cart {
+    height: 25px;
+    width: 25px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    flex: 1;
+    padding: 20px;
+    background-color: lightblue;
+    margin: 10px;
+    height: 22rem;
+    border-radius: 10px;
+}
+
+.op {
+    height: 12rem;
+    width: 21rem;
+}
+
+.title {
+    margin: 17px;
+}
+
+.price {
+    margin: 10px;
+}
+
+.button {
+    padding: 5px;
+    width: 4rem;
+    display: flex;
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+
+.Plus {
+    height: 15px;
+    width: 40px;
+
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
