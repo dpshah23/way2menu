@@ -1,0 +1,5 @@
+pyrebase
+pyrebase4
+django
+djangorestframework
+django-cors-headers
