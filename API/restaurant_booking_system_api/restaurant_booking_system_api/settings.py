@@ -58,12 +58,11 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.FileUploadParser',
-        'rest_framework.parsers.PlainTextParser',  # Add Plain Text Parser here
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        'api.renderers.PlainTextRenderer',  # Add your custom PlainTextRenderer here
+      
     ],
 }
 
