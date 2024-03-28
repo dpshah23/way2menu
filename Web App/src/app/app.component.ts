@@ -11,13 +11,20 @@ export class AppComponent implements OnInit {
   email='';
   password='';
   constructor(private dataService: DataService) { }
-
   ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  send(){
+    this.dataService.send(this.email,this.password).subscribe((result)=>
+    (console.warn(result)))
+  }
+  /*ngOnInit(): void {
     const dataToSend = {'email':this.email,'password':this.password};
     this.dataService.sendData(dataToSend).subscribe(response => {
       console.log(response); // Handle the response from the API
     });
-  }
+  }*/
   /*constructor(private router: Router) { }
 
   ngOnInit(): void {
