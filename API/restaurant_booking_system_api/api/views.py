@@ -145,6 +145,11 @@ def add_restaurant(request):
         "time":time
         
     }
+    userstatus=False
+    if active==True:
+        auth=firebase.auth()
+        createuser=auth.create_user_with_email_and_password(email,password)
+        userstatus=True
 
     email="way2menu1@gmail.com"
     password="way2menu@2172987539319"
@@ -153,7 +158,9 @@ def add_restaurant(request):
     db=firebase.database()
     data_pushed=db.child("restaurant").child(restaurant_id).set(data,token=user['idToken'])
     data={
-        "pushed":True
+        "pushed":True,
+        'active':active,
+        'user_created':userstatus
     }
 
     return JsonResponse(data)
