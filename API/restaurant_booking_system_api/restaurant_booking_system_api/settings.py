@@ -63,7 +63,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        'yourapp.renderers.PlainTextRenderer',  # Add your custom PlainTextRenderer here
+        'api.renderers.PlainTextRenderer',  # Add your custom PlainTextRenderer here
     ],
 }
 
