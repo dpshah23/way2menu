@@ -9,7 +9,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  sendData(email:any,password:any){
+  send(email:any,password:any){
     return this.http.post('http://127.0.0.1:8000/login/',email,password);
   }
 }

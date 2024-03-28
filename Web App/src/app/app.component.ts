@@ -8,15 +8,15 @@ import { DataService } from '../app/data.service';
 })
 export class AppComponent implements OnInit {
   title = 'w2m';
-  email='';
-  password='';
+  email:string='';
+  password:string='';
   constructor(private dataService: DataService) { }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
 
   send(){
-    this.dataService.sendData(this.email,this.password).subscribe((result)=>
+    this.dataService.send(this.email,this.password).subscribe((result)=>
     (console.warn(result)))
   }
   /*ngOnInit(): void {
