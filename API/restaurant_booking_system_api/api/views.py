@@ -6,7 +6,8 @@ import json
 from rest_framework.authentication import TokenAuthentication
 import secrets
 from rest_framework.permissions import IsAuthenticated
-
+import datetime
+import random
 
 # Create your views here.
 
@@ -109,7 +110,48 @@ def addmenu(request):
 
     addmenudata=db.child('menus').child(restaurant_id).child(title).set(data,token=user['idToken'])
 
+    data={
+        'pushed':True,
+        'title':title,
+    }
+
+    return JsonResponse(data)
+
 
 @api_view(['GET'])
 def add_restaurant(request):
-    pass
+    restaurant_name=request.get('restaurant_name')
+    address=request.get('address')
+    mobile=request.get('mobile')
+    range=request.get('range')
+    time=datetime.datetime.now()
+    gstno=request.get('gstno')
+    restaurant_id=random.randint(00000,99999)
+    email=request.get('email')
+    password=request.get('password')
+    active=request.get('active')
+
+    data={
+        'restaurant_name':restaurant_name,
+        'address':address,
+        "mobile":mobile,
+        "range":range,
+        "gstno":gstno,
+        "email":email,
+        "password":password,
+        "active":active,
+        "time":time
+        
+    }
+
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
+    auth=firebase.auth()
+    user=auth.sign_in_with_email_and_password(email,password)
+    db=firebase.database()
+    data_pushed=db.child("restaurant").child(restaurant_id).set(data,token=user['idToken'])
+    data={
+        "pushed":True
+    }
+
+    return JsonResponse(data)
