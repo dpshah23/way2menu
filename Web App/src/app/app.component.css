@@ -4,17 +4,17 @@
     box-sizing: border-box;
 }
 .background-image {
-    background-image: url('../assets/WAY 2 MENU.jpg'); /* Optional: Set background color for the body */
+    background-image: url('../assets/WAY 2 MENU.jpg');
     background-size: cover;
     background-position: center;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
   }
 
 .login-container {
-    max-width: 400px; /* Adjust the maximum width of your container */
-    margin: 0 auto; /* Center the container horizontally */
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for the container */
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     align-items: center;
