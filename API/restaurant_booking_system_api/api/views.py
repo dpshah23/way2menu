@@ -11,6 +11,16 @@ import random
 
 # Create your views here.
 
+from rest_framework.parsers import BaseParser
+
+class PlainTextParser(BaseParser):
+    media_type = 'text/plain'
+
+    def parse(self, stream, media_type=None, parser_context=None):
+        text = stream.read().decode('utf-8')
+        return text
+
+
 config={
     'apiKey': "AIzaSyCxSm5xlUi-gYrHNh7DqQTzwuKFbOexGRo",
     'authDomain': "way2menu-cc380.firebaseapp.com",
