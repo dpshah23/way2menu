@@ -3,6 +3,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+.container {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 .background-image {
     background-image: url('../assets/WAY 2 MENU.jpg');
     background-size: cover;
@@ -11,7 +17,7 @@
   }
 
 .login-container {
-    max-width: 400px;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
