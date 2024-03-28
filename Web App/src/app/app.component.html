@@ -10,6 +10,9 @@
   <input type="password" placeholder="password" [(ngModel)]="password"><br><br>
   <button type="submit" (click)="send()">Log in</button>
   </form>
+  <div *ngIf="greet">
+<p>{{ greet }}</p>
+</div>
 </div>
 </div>
 </div>
