@@ -11,9 +11,7 @@ export class AppComponent implements OnInit {
   email='';
   password='';
   constructor(private dataService: DataService) { }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 
   send(){
     this.dataService.send(this.email,this.password).subscribe((result)=>
