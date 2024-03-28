@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.background-image {
+    background-image: url('../assets/WAY 2 MENU.jpg'); /* Optional: Set background color for the body */
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Full viewport height */
+  }
+
+.login-container {
+    max-width: 400px; /* Adjust the maximum width of your container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for the container */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+  }
+.login-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-header h2 {
+    color: #333;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.login-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
