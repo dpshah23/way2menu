@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    const dataToSend = { /* Your data object */ };
-    this.dataService.sendData(this.email,this.password).subscribe((response: any) => {
+    const dataToSend = {email:this.email,password:this.password};
+    this.dataService.sendData(dataToSend).subscribe((response: any) => {
       console.log(response); // Handle the response from the API
     });
   }
