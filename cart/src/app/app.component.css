@@ -2,26 +2,6 @@
     margin: 0;
     padding: 0;
 }
-
-.bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #E9D9C9;
-    border-bottom: 3px solid black;
-    gap: 80rem;
-}
-
-.image {
-    height: 9rem;
-    width: 9rem;
-}
-
-.cart {
-    height: 25px;
-    width: 25px;
-}
-
 .container {
     display: flex;
     flex-wrap: wrap;
