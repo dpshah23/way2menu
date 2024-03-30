@@ -21,12 +21,12 @@
     padding-bottom: 5px;
     padding-right: 5px;
 }
-/*.background-image {
-    background-image: url('../assets/WAY 2 MENU.jpg');
+.background-image {
+    background-image: url('../assets/WAY 2 MENU.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
-  }*/
+  }
 
 .container button[type="submit"] {
     width: 100%;
