@@ -5,10 +5,20 @@ header {
     align-items: center;
     background-color: #ffffff;
     border-bottom: 3px solid black;
-    gap : 30rem;
+    gap : 27rem;
     max-height: 60px;
 }
 img{
     max-width : 50px;
     max-height : 50px;
+}
+.logos{
+    gap:0rem;
+}
+button{
+    background-color: #ffffff;
+    border: 0cap;
+}
+button:hover{
+    background-color: antiquewhite;
 }
