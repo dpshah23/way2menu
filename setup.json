@@ -3,6 +3,7 @@
     'authDomain': "way2menu-cc380.firebaseapp.com",
     'projectId': "way2menu-cc380",
     'storageBucket': "way2menu-cc380.appspot.com",
+    'databaseURL':"https://way2menu-cc380-default-rtdb.asia-southeast1.firebasedatabase.app/",
     'messagingSenderId': "7445769295",
     'appId': "1:7445769295:web:42be734ec3137d2ad94e3a",
     'measurementId': "G-8Y2N8BGR7J"

@@ -141,6 +141,9 @@ def add_restaurant(request):
     email=request.GET['email']
     password=request.GET['password']
     active=request.GET['active']
+    owner_name=request.GET['owner_name']
+    owner_age=request.GET['owner_age']
+    gender=request.GET['owner_gender']
     time=str(time)
 
     data={
