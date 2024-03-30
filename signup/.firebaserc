@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "way2menu-e0407": {
+      "hosting": {
+        "signup": [
+          "way2menu-e0407"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "way2menu-e0407"
+  }
+}
