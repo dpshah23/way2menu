@@ -129,21 +129,21 @@ def addmenu(request):
     return JsonResponse(data)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def add_restaurant(request):
-    restaurant_name=request.GET['restaurant_name']
-    address=request.GET['address']
-    mobile=request.GET['mobile']
-    range=request.GET['range']
+    restaurant_name=request.get('restaurant_name')
+    address=request.get('address')
+    mobile=request.get('mobile')
+    range=request.get('range')
     time=datetime.datetime.now()
-    gstno=request.GET['gstno']
+    gstno=request.get('gstno')
     restaurant_id=random.randint(00000,99999)
-    email=request.GET['email']
-    password=request.GET['password']
-    active=request.GET['active']
-    owner_name=request.GET['owner_name']
-    owner_age=request.GET['owner_age']
-    gender=request.GET['owner_gender']
+    email=request.get('email')
+    password=request.get('password')
+    active=request.get('active')
+    owner_name=request.get('owner_name')
+    owner_age=request.get('owner_age')
+    gender=request.get('owner_gender')
     time=str(time)
 
     data={
@@ -155,7 +155,10 @@ def add_restaurant(request):
         "email":email,
         "password":password,
         "active":active,
-        "time":time
+        "time":time,
+        "owner_name":owner_name,
+        "owner_age":owner_age,
+        "gender":gender
         
     }
     userstatus=False
