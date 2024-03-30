@@ -1,34 +1,39 @@
-
-  <form>
-    <div class="container">
-  <h2>RESTAURANT DETAILS</h2>
-  <h3>restaurant name</h3>
-  <input type="text" [(ngModel)]="name" name="name" placeholder="restaurant name"><br>
-  <h3>restaurant logo</h3>
-  <input type="file" [(ngModel)]="logo" name="logo" id="logo">
-  <h3>restaurant address</h3>
-  <input type="text" [(ngModel)]="address" name="address" placeholder="restaurant address"><br>
-  <h3>restaurant gst number</h3>
-  <input type="number" [(ngModel)]="gst_number" name="gst_number" placeholder="gst number"><br>
-  </div>
+<div class="whole_signup">
   <div class="container">
+  <form>
+    <div class="signup">
+  <h2>RESTAURANT DETAILS</h2>
+  <p>restaurant name</p>
+  <input type="text" [(ngModel)]="name" name="name" placeholder="restaurant name"><br>
+  <p>restaurant logo</p>
+  <input type="file" [(ngModel)]="logo" name="logo" id="logo">
+  <p>restaurant address</p>
+  <input type="text" [(ngModel)]="address" name="address" placeholder="restaurant address"><br>
+  <p>restaurant gst number</p>
+  <input type="number" [(ngModel)]="gst_number" name="gst_number" placeholder="gst number"><br>
+    </div>
+  <br>
+    <div class="signup">
   <h2>OWNER DETAILS</h2>
-  <h3>name</h3>
+  <p>name</p>
   <input type="text" [(ngModel)]="owner_name" name="owner_name"><br>
-  <h3>owner age</h3>
+  <p>owner age</p>
   <input type="number" [(ngModel)]="owner_age" name="owner_age"><br>
-  <h3>owner gender</h3>
+  <p>owner gender</p>
   <select id="dropdown" [(ngModel)]="owner_gender" name="gender"><br>
     <option value="male">male</option>
     <option value="female">female</option>
     <option value="other">other</option>
   </select>
-  <h3>owner number</h3>
+  <p>owner number</p>
   <input type="number" [(ngModel)]="owner_number" name="owner_number"><br>
-  <h3>owner email</h3>
+  <p>owner email</p>
   <input type="email" [(ngModel)]="owner_email" name="owner_email"><br>
-  <h3>owner address</h3>
+  <p>owner address</p>
   <input type="text" [(ngModel)]="owner_address" name="owner_address"><br>
-  </div>
+    </div>
+  <br>
   <button type="submit">signup</button>
-  </form>
+</form>
+</div>
+</div>
