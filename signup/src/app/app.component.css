@@ -4,14 +4,24 @@
     padding: 0;
     box-sizing: border-box;
 }
+.whole{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 .container {
    display: flex;
    justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: 2px solid black;
     width:300px;
-    box-shadow: 0 2px 4px 2px rgba(14, 0, 0, 1);
+    background-color: #fff;
   }
 .signup{
     border: 0.5px solid black;
