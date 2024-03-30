@@ -30,11 +30,11 @@
   <input type="number" [(ngModel)]="owner_number" name="owner_number"><br>
   <p>owner email</p>
   <input type="email" [(ngModel)]="owner_email" name="owner_email"><br>
-  <p>owner address</p>
-  <input type="text" [(ngModel)]="owner_address" name="owner_address"><br>
+  <p>account password</p>
+  <input type="password" [(ngModel)]="account_password" name="account_password"><br>
     </div>
   <br>
-  <button type="submit">signup</button>
+  <button type="submit" (click)="send()">signup</button>
 </form>
 </div>
 </div>
