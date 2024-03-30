@@ -39,6 +39,7 @@ auth=firebase.auth()
 @api_view(['POST'])
 
 def login(request):
+    print("hello")
    
     output = {'auth': False}
     
