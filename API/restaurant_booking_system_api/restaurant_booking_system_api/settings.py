@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8m&cpfxrd*obl76g^mfd3*9ws8mcwkmq^kpe)42qtk32ji-qi5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.135.1', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -56,7 +56,11 @@ MIDDLEWARE = [
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200', 
-    'http://192.168.135.1:8081' # Add your Angular app's URL here
+    'http://192.168.135.1',
+    'http://192.168.135.1:8081',
+     'http://localhost:8081',
+     'http://192.168.1.7:8081'
+       # Add your Angular app's URL here
 ]
 # CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'restaurant_booking_system_api.urls'

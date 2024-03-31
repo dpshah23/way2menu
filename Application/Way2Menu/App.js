@@ -3,32 +3,49 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native';
 import { useState } from 'react';
-import axios from 'axios';
+import { NavigationContainer } from '@react-navigation/native';
+import home from './Home/home';
+import { Alert } from 'react-native';
+
 
 export default function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = ({navigation}) => {
     console.log('Email:', email);
     console.log('Password:', password);
-    // Add your login logic here
 
-    const cred = {
-      'email': email,
-      'password': password
+    const url = 'http://192.168.135.1:8000/login/';
+
+    // Constructing the request body
+    const requestBody = {
+      email: email,
+      password: password
     };
 
-    axios.post('http://192.168.135.1:8000/login/', cred, {
+    // Configuring the fetch request
+    fetch(url, {
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json', // Specify the content type
+      },
+      body: JSON.stringify(requestBody), // Convert the body to JSON string
     })
-      .then(response => {
-        console.log(response.data);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Response:', data);
+        if(data.auth==true){
+            navigation.navigate('home',{'restaurant_id':data.restaurant_id,'restaurnat_email':data.restaurnat_email,'restaurant_name':data.restaurant_name})
+        }
+        else{
+          Alert.alert("Wrong Credentials","Email And Password Are Incorrect..");
+        }
       })
-      .catch(error => {
-        console.error(error);
+      .catch((error) => {
+        
+        console.error('Error:', error);
+        // Handle errors here
       });
   };
 
