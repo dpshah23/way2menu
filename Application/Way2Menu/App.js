@@ -1,18 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import * as React from 'react';
+import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
-import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import home from './Home/home';
-import { Alert } from 'react-native';
-
 
 export default function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = ({navigation}) => {
+  const handleButtonPress = () => {
+    // Navigate to Home screen with parameters
+    navigateToHomeScreen({ restaurant_id: 70571, restaurnat_email: 'dpshah207@gmail.com', restaurant_name: 'WTF' });
+  };
+
+  const handleLogin = () => {
     console.log('Email:', email);
     console.log('Password:', password);
 
@@ -35,42 +36,55 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         console.log('Response:', data);
-        if(data.auth==true){
-            navigation.navigate('home',{'restaurant_id':data.restaurant_id,'restaurnat_email':data.restaurnat_email,'restaurant_name':data.restaurant_name})
-        }
-        else{
-          Alert.alert("Wrong Credentials","Email And Password Are Incorrect..");
+        if (data.auth === true) {
+          // Navigate to Home screen with parameters
+          navigateToHomeScreen(data);
+        } else {
+          Alert.alert("Wrong Credentials", "Email And Password Are Incorrect..");
         }
       })
       .catch((error) => {
-        
         console.error('Error:', error);
         // Handle errors here
       });
   };
 
+  const navigateToHomeScreen = (params) => {
+    // Navigate to Home screen with parameters
+    // You should replace 'Home' with the actual name of your home screen component
+    // Also, pass the parameters object as the second argument to the navigate function
+    navigation.navigate('Home', params);
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Your Email"
-          onChangeText={text => setEmail(text)}
-          value={email}
-        />
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Your Password"
-          onChangeText={text => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-        />
-        <Button title="Login" onPress={handleLogin} />
-      </View>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Your Email"
+            onChangeText={text => setEmail(text)}
+            value={email}
+          />
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Your Password"
+            onChangeText={text => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+          />
+          <Button title="Login" onPress={handleLogin} />
+        </View>
+        <StatusBar style="auto" />
+        {/* this is testing purpose */}
+        <View>
+          <Button title="Go to Screen B" onPress={handleButtonPress} />
+        </View>
+        {/* this is */}
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
