@@ -181,3 +181,17 @@ def add_restaurant(request):
     }
 
     return JsonResponse(data)
+
+
+@api_view(['GET'])
+def retriveorders(request):
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
+    auth=firebase.auth()
+    user=auth.sign_in_with_email_and_password(email,password)
+    id=request.GET['restaurant_id']
+    name=request.GET['restaurant_name']
+    orders=db.child('orders').child(id).get(token=user['idToken'])
+    orders_data=orders.val()
+    
+    return JsonResponse(orders_data)
