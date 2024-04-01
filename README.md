@@ -7,8 +7,9 @@ This is a Django REST Framework API for a restaurant booking system.
 Setup
 Install the required packages listed in requirements.txt.
 
+Copy Code
 ```bash
-Copy code
+
 pip install -r requirements.txt
 ```
 
