@@ -185,10 +185,10 @@ def add_restaurant(request):
 
 @api_view(['GET'])
 def retriveorders(request):
-    db=firebase.database()
+    
     email="way2menu1@gmail.com"
     password="way2menu@2172987539319"
-    auth=firebase.auth()
+
     user=auth.sign_in_with_email_and_password(email,password)
     id=request.GET['restaurant_id']
     name=request.GET['restaurant_name']
@@ -207,4 +207,31 @@ def retriveorders(request):
        
         return JsonResponse({"error": "No data found for the specified restaurant ID"}, status=404)
     
-   
+@api_view(['GET'])
+def resinfo(request):
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
+    auth=firebase.auth()
+    user=auth.sign_in_with_email_and_password(email,password)
+
+    restaurant_id=request.GET['restaurant_id']
+    orders=db.child('Orders').child(restaurant_id).get(user['idToken'])
+    orders_data=orders.val()
+    orders_length=len(orders_data)
+    total_price=0
+
+    for key in orders_data:
+        order=orders_data[key]
+        if 'price' in order:
+            total_price+=order['price']
+
+        else:
+            pass
+
+    jsonpass={
+        'total_orders':orders_length,
+        'total_price':total_price
+    }
+
+    return JsonResponse(jsonpass)
+

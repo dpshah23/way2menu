@@ -6,6 +6,7 @@ urlpatterns = [
     path('getmenu',menu,name="getmenu"),
     path('addmenu',addmenu,name="addmenu"),
     path('addrestaurant',add_restaurant,name="add_restaurant"),
-    path('getorders',retriveorders,name="getorders")
+    path('getorders',retriveorders,name="getorders"),
+    path('getresinfo',resinfo,name="getresinfo")
     
 ]
