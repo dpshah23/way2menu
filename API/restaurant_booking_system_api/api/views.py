@@ -195,7 +195,7 @@ def retriveorders(request):
     print(name)
     print(id)
     id=int(id)
-    ref=db.child('orders')
+    ref=db.child('Orders')
     orders=ref.child(id).get(token=user['idToken'])
     print(orders)
     orders_data=orders.val()
