@@ -21,4 +21,15 @@ user=auth.sign_in_with_email_and_password(email,password)
 
 orders=db.child('Orders').child(75275).get(user['idToken'])
 orders_data=orders.val()
-print(orders_data)
+print(len(orders_data))
+total_price=0
+
+for key in orders_data:
+    order=orders_data[key]
+    if 'price' in order:
+        total_price+=order['price']
+
+    else:
+        print("price Not found")
+
+print("total price : ",total_price)
