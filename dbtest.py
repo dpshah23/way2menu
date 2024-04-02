@@ -33,4 +33,5 @@ for key in orders_data:
         print("price Not found")
 
 print("total price : ",total_price)
+print("total price : ",total_price)
 
