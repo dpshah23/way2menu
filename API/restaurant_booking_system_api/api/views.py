@@ -69,14 +69,6 @@ def login(request):
     finally:
         return JsonResponse (output)
 
-@api_view(['GET'])
-def signup(request):
-    if request.method=='GET':
-        email=request.get('email')
-        password=request.get('password')
-
-
-    pass
 
 
 @api_view(['GET'])
@@ -132,22 +124,23 @@ def addmenu(request):
 
 @api_view(['POST'])
 def add_restaurant(request):
-    restaurant_name=request.get('restaurant_name')
-    address=request.get('address')
-    mobile=request.get('mobile')
-    range=request.get('range')
-    time=datetime.datetime.now()
-    gstno=request.get('gstno')
-    restaurant_id=random.randint(00000,99999)
-    email=request.get('email')
-    password=request.get('password')
-    active=request.get('active')
-    owner_name=request.get('owner_name')
-    owner_age=request.get('owner_age')
-    gender=request.get('owner_gender')
-    time=str(time)
+    if request.method=="POST":
+        restaurant_name=request.data.get('restaurant_name')
+        address=request.data.get('address')
+        mobile=request.data.get('mobile')
+        range=request.data.get('range')
+        time=datetime.datetime.now()
+        gstno=request.data.get('gstno')
+        restaurant_id=random.randint(00000,99999)
+        email=request.data.get('email')
+        password=request.data.get('password')
+        active=request.data.get('active')
+        owner_name=request.data.get('owner_name')
+        owner_age=request.data.get('owner_age')
+        gender=request.data.get('owner_gender')
+        time=str(time)
 
-    data={
+        data={
         'restaurant_name':restaurant_name,
         'address':address,
         "mobile":mobile,
@@ -161,24 +154,24 @@ def add_restaurant(request):
         "owner_age":owner_age,
         "gender":gender
         
-    }
-    userstatus=False
-    if active==True:
-        auth=firebase.auth()
-        createuser=auth.create_user_with_email_and_password(email,password)
-        userstatus=True
+        }
+        userstatus=False
+        if active==True:
+            auth=firebase.auth()
+            createuser=auth.create_user_with_email_and_password(email,password)
+            userstatus=True
 
-    email="way2menu1@gmail.com"
-    password="way2menu@2172987539319"
-    auth=firebase.auth()
-    user=auth.sign_in_with_email_and_password(email,password)
-    db=firebase.database()
-    data_pushed=db.child("restaurant").child(restaurant_id).set(data,token=user['idToken'])
-    data={
-        "pushed":True,
-        'active':active,
-        'user_created':userstatus
-    }
+        email="way2menu1@gmail.com"
+        password="way2menu@2172987539319"
+        auth=firebase.auth()
+        user=auth.sign_in_with_email_and_password(email,password)
+        db=firebase.database()
+        data_pushed=db.child("restaurant").child(restaurant_id).set(data,token=user['idToken'])
+        data={
+            "pushed":True,
+            'active':active,
+            'user_created':userstatus
+        }
 
     return JsonResponse(data)
 
