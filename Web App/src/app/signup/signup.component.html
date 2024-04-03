@@ -1,0 +1,43 @@
+<div class="background-image">
+    <div class="whole">
+    <div class="container">
+    <form>
+      <div class="signup">
+    <h2>RESTAURANT DETAILS</h2>
+    <p>restaurant name</p>
+    <input type="text" [(ngModel)]="name" name="name" placeholder="restaurant name"><br>
+    <p>restaurant logo</p>
+    <input type="file" [(ngModel)]="logo" name="logo" id="logo">
+    <p>restaurant address</p>
+    <input type="text" [(ngModel)]="address" name="address" placeholder="restaurant address"><br>
+    <p>restaurant gst number</p>
+    <input type="number" [(ngModel)]="gst_number" name="gst_number" placeholder="gst number"><br>
+    <p>range of dishes served</p>
+    <input type="text" [(ngModel)]="range" name="range" placeholder="range"><br>
+      </div>
+    <br>
+      <div class="signup">
+    <h2>OWNER DETAILS</h2>
+    <p>name</p>
+    <input type="text" [(ngModel)]="owner_name" name="owner_name"><br>
+    <p>owner age</p>
+    <input type="number" [(ngModel)]="owner_age" name="owner_age"><br>
+    <p>owner gender</p>
+    <select id="dropdown" [(ngModel)]="owner_gender" name="gender"><br>
+      <option value="male">male</option>
+      <option value="female">female</option>
+      <option value="other">other</option>
+    </select>
+    <p>owner number</p>
+    <input type="number" [(ngModel)]="owner_number" name="owner_number"><br>
+    <p>owner email</p>
+    <input type="email" [(ngModel)]="owner_email" name="owner_email"><br>
+    <p>account password</p>
+    <input type="password" [(ngModel)]="account_password" name="account_password"><br>
+      </div>
+    <br>
+    <button type="submit" (click)="send()">signup</button>
+  </form>
+  </div>
+  </div>
+  </div>
