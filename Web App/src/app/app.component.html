@@ -1,15 +1,23 @@
 <div class="background-image">
+  <form class="login-form">
+<div [class.hidden]="hide">
 <div class="container">
 <div class="login-container">
   <div class="login-header">
   <h2>WAY 2 MENU!</h2>
   </div>
   <br><br>
-  <form class="login-form">
+
   <input type="email" placeholder="email address or username" [(ngModel)]="email" name="email"><br><br>
   <input type="password" placeholder="password" [(ngModel)]="password" name="password"><br><br>
   <button type="submit" (click)="send()">Log in</button>
+  <h4>Don't have an account?</h4><button type="button" (click)="signup()">signup</button>
+</div>
+</div>
+</div>
+
+  <div *ngIf="signup1"><router-outlet></router-outlet>
+  </div>
   </form>
-</div>
-</div>
+
 </div>
