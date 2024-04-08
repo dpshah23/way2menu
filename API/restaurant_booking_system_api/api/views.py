@@ -228,3 +228,26 @@ def resinfo(request):
 
     return JsonResponse(jsonpass)
 
+@api_view(['POST'])
+def takeorders(request):
+    restauant_id=request.data.get('restaurant_id')
+    tableno=request.data.get('tableno')
+    items=request.data.get('items')
+    payment_method=request.data.get('payment_method')
+    total_val=request.data.get('total')
+
+    data={
+        
+        'tableno':tableno,
+        'items':{items},
+        'total_value':total_val,
+        'payment_method':payment_method
+    }
+
+    data1=db.child('Orders').child(restauant_id).push
+    
+    return_data={
+        'pushed':True
+    }
+
+    return JsonResponse(return_data)
