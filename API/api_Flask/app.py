@@ -68,6 +68,41 @@ def menu():
 
 
     return jsonify(menu_data)
+
+@app.route('/addmenu',methods=['GET','POST'])
+def addmenu():
+    if Request.method=="POST":
+        email="way2menu1@gmail.com"
+        password="way2menu@2172987539319"
+        auth=firebase.auth()
+        user=auth.sign_in_with_email_and_password(email,password)
+        restaurant_id=request.form.get('restaurant_id')
+        restaurnant_name=request.GET['restaurant_name']
+        title=request.form.get('title')
+        desc=request.form.get('desc')
+        price=request.form.get('price')
+        imgurl=request.form.get('imgurl')
+        isspecial=request.form.get('isspecial')
+
+        data={
+            "title":title,
+            "description":desc,
+            "price":price,
+            "imgurl":imgurl,
+            "special":isspecial
+        }
+
+        db=firebase.database()
+
+        addmenudata=db.child('menus').child(restaurant_id).child(title).set(data,token=user['idToken'])
+
+        data={
+            'pushed':True,
+            'title':title,
+        }
+
+    return jsonify(data)
+
     
 if __name__=="__main__":
     app.run(debug=True)
