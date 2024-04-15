@@ -53,5 +53,21 @@ def login():
     finally:
         return jsonify(output)
     
+@app.route('/getmenu',methods=['GET'])
+def menu():
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
+    auth=firebase.auth()
+    user=auth.sign_in_with_email_and_password(email,password)
+    restaurant_name=request.args.get('restaurantnm')
+    tableno=request.args.get('tableno')
+    restaurant_id=request.args.get('restaurant_id')
+    menu_ref = db.child("menus")
+    menu_snapshot = menu_ref.child(restaurant_id).get(token=user['idToken'])
+    menu_data = menu_snapshot.val()
+
+
+    return jsonify(menu_data)
+    
 if __name__=="__main__":
     app.run(debug=True)
