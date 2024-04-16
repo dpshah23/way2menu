@@ -157,7 +157,28 @@ def add_restaurant():
 
     return jsonify(data)
 
+@app.route('/getorders',methods=['GET'])
+def retriveorders():
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
 
+    user=auth.sign_in_with_email_and_password(email,password)
+    id=request.args.get('restaurant_id')
+    name=request.args.get('restaurant_name')
+    print(name)
+    print(id)
+    id=int(id)
+    ref=db.child('Orders')
+    orders=ref.child(id).get(token=user['idToken'])
+    print(orders)
+    orders_data=orders.val()
+    print(orders_data)
+    if orders_data:
+        
+        return jsonify(orders_data, safe=False)
+    else:
+       
+        return jsonify({"error": "No data found for the specified restaurant ID"}, status=404)
 
     
 if __name__=="__main__":
