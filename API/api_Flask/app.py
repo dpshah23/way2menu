@@ -210,6 +210,29 @@ def getresinfo():
     return jsonify(jsonpass)
 
 
+@app.route('/takeorders',methods=['POST','GET'])
+def takeorders():
+    restauant_id=request.form.get('restaurant_id')
+    tableno=request.form.get('tableno')
+    items=request.form.get('items')
+    payment_method=request.form.get('payment_method')
+    total_val=request.form.get('total')
+
+    data={
+        
+        'tableno':tableno,
+        'items':{items},
+        'total_value':total_val,
+        'payment_method':payment_method
+    }
+
+    data1=db.child('Orders').child(restauant_id).push
+    
+    return_data={
+        'pushed':True
+    }
+
+    return jsonify(return_data)
     
 if __name__=="__main__":
     app.run(debug=True)
