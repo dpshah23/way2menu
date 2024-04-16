@@ -180,6 +180,36 @@ def retriveorders():
        
         return jsonify({"error": "No data found for the specified restaurant ID"}, status=404)
 
+
+@app.route('/getresinfo',methods=['GET'])
+def getresinfo():
+    email="way2menu1@gmail.com"
+    password="way2menu@2172987539319"
+    auth=firebase.auth()
+    user=auth.sign_in_with_email_and_password(email,password)
+
+    restaurant_id=request.args.get('restaurant_id')
+    orders=db.child('Orders').child(restaurant_id).get(user['idToken'])
+    orders_data=orders.val()
+    orders_length=len(orders_data)
+    total_price=0
+
+    for key in orders_data:
+        order=orders_data[key]
+        if 'price' in order:
+            total_price+=order['price']
+
+        else:
+            pass
+
+    jsonpass={
+        'total_orders':orders_length,
+        'total_price':total_price
+    }
+
+    return jsonify(jsonpass)
+
+
     
 if __name__=="__main__":
     app.run(debug=True)
