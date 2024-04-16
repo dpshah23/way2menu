@@ -103,6 +103,62 @@ def addmenu():
 
     return jsonify(data)
 
+
+@app.route('/signup',methods=['POST','GET'])
+def add_restaurant():
+    if Request.method=="POST":
+        restaurant_name=request.form.get('restaurant_name')
+        address=request.form.get('address')
+        mobile=request.form.get('mobile')
+        range=request.form.get('range')
+        time=datetime.datetime.now()
+        gstno=request.form.get('gstno')
+        restaurant_id=random.randint(00000,99999)
+        email=request.form.get('email')
+        password=request.form.get('password')
+        active=request.form.get('active')
+        owner_name=request.form.get('owner_name')
+        owner_age=request.form.get('owner_age')
+        gender=request.form.get('owner_gender')
+        time=str(time)
+
+        data={
+        'restaurant_name':restaurant_name,
+        'address':address,
+        "mobile":mobile,
+        "range":range,
+        "gstno":gstno,
+        "email":email,
+        "password":password,
+        "active":active,
+        "time":time,
+        "owner_name":owner_name,
+        "owner_age":owner_age,
+        "gender":gender
+        
+        }
+        userstatus=False
+        if active==True:
+            auth=firebase.auth()
+            createuser=auth.create_user_with_email_and_password(email,password)
+            userstatus=True
+
+        email="way2menu1@gmail.com"
+        password="way2menu@2172987539319"
+        auth=firebase.auth()
+        user=auth.sign_in_with_email_and_password(email,password)
+        db=firebase.database()
+        data_pushed=db.child("restaurant").child(restaurant_id).set(data,token=user['idToken'])
+        data={
+            "pushed":True,
+            'active':active,
+            'user_created':userstatus
+        }
+
+    return jsonify(data)
+
+
+
     
 if __name__=="__main__":
     app.run(debug=True)
