@@ -1,26 +1,13 @@
-from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
+import flask
+from flask import *
 import pyrebase
-from rest_framework.decorators import *
-import json
-from rest_framework.authentication import TokenAuthentication
-import secrets
-from rest_framework.permissions import IsAuthenticated
 import datetime
 import random
 
-# Create your views here.
+# App Initialization
+app=Flask(__name__)
 
-from rest_framework.parsers import BaseParser
-
-class PlainTextParser(BaseParser):
-    media_type = 'text/plain'
-
-    def parse(self, stream, media_type=None, parser_context=None):
-        text = stream.read().decode('utf-8')
-        return text
-
-
+# Firebase Auth And Database Initialization
 config={
     'apiKey': "AIzaSyCxSm5xlUi-gYrHNh7DqQTzwuKFbOexGRo",
     'authDomain': "way2menu-cc380.firebaseapp.com",
@@ -36,17 +23,14 @@ firebase=pyrebase.initialize_app(config=config)
 db=firebase.database()
 auth=firebase.auth()
 
-@api_view(['POST'])
 
-def login(request):
-    print("hello")
-   
+@app.route('/login',methods=["POST","GET"])
+def login():
     output = {'auth': False}
-    
     try:
         if request.method=="POST":
-           email=request.data.get('email')
-           password=request.data.get('password')
+           email=request.form.get('email')
+           password=request.form.get('password')
 
            print(email,password)
 
@@ -67,77 +51,75 @@ def login(request):
        
 
     finally:
-        return JsonResponse (output)
-
-
-
-@api_view(['GET'])
-def menu(request):
+        return jsonify(output)
+    
+@app.route('/getmenu',methods=['GET'])
+def menu():
     email="way2menu1@gmail.com"
     password="way2menu@2172987539319"
     auth=firebase.auth()
     user=auth.sign_in_with_email_and_password(email,password)
-    restaurant_name=request.GET['restaurantnm']
-    tableno=request.GET['tableno']
-    restaurant_id=request.GET['restaurant_id']
+    restaurant_name=request.args.get('restaurantnm')
+    tableno=request.args.get('tableno')
+    restaurant_id=request.args.get('restaurant_id')
     menu_ref = db.child("menus")
     menu_snapshot = menu_ref.child(restaurant_id).get(token=user['idToken'])
     menu_data = menu_snapshot.val()
 
 
-    return JsonResponse(menu_data)
+    return jsonify(menu_data)
+
+@app.route('/addmenu',methods=['GET','POST'])
+def addmenu():
+    if Request.method=="POST":
+        email="way2menu1@gmail.com"
+        password="way2menu@2172987539319"
+        auth=firebase.auth()
+        user=auth.sign_in_with_email_and_password(email,password)
+        restaurant_id=request.form.get('restaurant_id')
+        restaurnant_name=request.GET['restaurant_name']
+        title=request.form.get('title')
+        desc=request.form.get('desc')
+        price=request.form.get('price')
+        imgurl=request.form.get('imgurl')
+        isspecial=request.form.get('isspecial')
+
+        data={
+            "title":title,
+            "description":desc,
+            "price":price,
+            "imgurl":imgurl,
+            "special":isspecial
+        }
+
+        db=firebase.database()
+
+        addmenudata=db.child('menus').child(restaurant_id).child(title).set(data,token=user['idToken'])
+
+        data={
+            'pushed':True,
+            'title':title,
+        }
+
+    return jsonify(data)
 
 
-@api_view(['GET'])
-def addmenu(request):
-    email="way2menu1@gmail.com"
-    password="way2menu@2172987539319"
-    auth=firebase.auth()
-    user=auth.sign_in_with_email_and_password(email,password)
-    restaurant_id=request.GET['restaurant_id']
-    restaurnant_name=request.GET['restaurant_name']
-    title=request.GET['title']
-    desc=request.GET['desc']
-    price=request.GET['price']
-    imgurl=request.GET['imgurl']
-    isspecial=request.GET['isspecial']
-
-    data={
-        "title":title,
-        "description":desc,
-        "price":price,
-        "imgurl":imgurl,
-        "special":isspecial
-    }
-
-    db=firebase.database()
-
-    addmenudata=db.child('menus').child(restaurant_id).child(title).set(data,token=user['idToken'])
-
-    data={
-        'pushed':True,
-        'title':title,
-    }
-
-    return JsonResponse(data)
-
-
-@api_view(['POST'])
-def add_restaurant(request):
-    if request.method=="POST":
-        restaurant_name=request.data.get('restaurant_name')
-        address=request.data.get('address')
-        mobile=request.data.get('mobile')
-        range=request.data.get('range')
+@app.route('/signup',methods=['POST','GET'])
+def add_restaurant():
+    if Request.method=="POST":
+        restaurant_name=request.form.get('restaurant_name')
+        address=request.form.get('address')
+        mobile=request.form.get('mobile')
+        range=request.form.get('range')
         time=datetime.datetime.now()
-        gstno=request.data.get('gstno')
+        gstno=request.form.get('gstno')
         restaurant_id=random.randint(00000,99999)
-        email=request.data.get('email')
-        password=request.data.get('password')
-        active=request.data.get('active')
-        owner_name=request.data.get('owner_name')
-        owner_age=request.data.get('owner_age')
-        gender=request.data.get('owner_gender')
+        email=request.form.get('email')
+        password=request.form.get('password')
+        active=request.form.get('active')
+        owner_name=request.form.get('owner_name')
+        owner_age=request.form.get('owner_age')
+        gender=request.form.get('owner_gender')
         time=str(time)
 
         data={
@@ -173,18 +155,16 @@ def add_restaurant(request):
             'user_created':userstatus
         }
 
-    return JsonResponse(data)
+    return jsonify(data)
 
-
-@api_view(['GET'])
-def retriveorders(request):
-    
+@app.route('/getorders',methods=['GET'])
+def retriveorders():
     email="way2menu1@gmail.com"
     password="way2menu@2172987539319"
 
     user=auth.sign_in_with_email_and_password(email,password)
-    id=request.GET['restaurant_id']
-    name=request.GET['restaurant_name']
+    id=request.args.get('restaurant_id')
+    name=request.args.get('restaurant_name')
     print(name)
     print(id)
     id=int(id)
@@ -195,19 +175,20 @@ def retriveorders(request):
     print(orders_data)
     if orders_data:
         
-        return JsonResponse(orders_data, safe=False)
+        return jsonify(orders_data, safe=False)
     else:
        
-        return JsonResponse({"error": "No data found for the specified restaurant ID"}, status=404)
-    
-@api_view(['GET'])
-def resinfo(request):
+        return jsonify({"error": "No data found for the specified restaurant ID"}, status=404)
+
+
+@app.route('/getresinfo',methods=['GET'])
+def getresinfo():
     email="way2menu1@gmail.com"
     password="way2menu@2172987539319"
     auth=firebase.auth()
     user=auth.sign_in_with_email_and_password(email,password)
 
-    restaurant_id=request.GET['restaurant_id']
+    restaurant_id=request.args.get('restaurant_id')
     orders=db.child('Orders').child(restaurant_id).get(user['idToken'])
     orders_data=orders.val()
     orders_length=len(orders_data)
@@ -226,15 +207,16 @@ def resinfo(request):
         'total_price':total_price
     }
 
-    return JsonResponse(jsonpass)
+    return jsonify(jsonpass)
 
-@api_view(['POST'])
-def takeorders(request):
-    restauant_id=request.data.get('restaurant_id')
-    tableno=request.data.get('tableno')
-    items=request.data.get('items')
-    payment_method=request.data.get('payment_method')
-    total_val=request.data.get('total')
+
+@app.route('/takeorders',methods=['POST','GET'])
+def takeorders():
+    restauant_id=request.form.get('restaurant_id')
+    tableno=request.form.get('tableno')
+    items=request.form.get('items')
+    payment_method=request.form.get('payment_method')
+    total_val=request.form.get('total')
 
     data={
         
@@ -250,4 +232,7 @@ def takeorders(request):
         'pushed':True
     }
 
-    return JsonResponse(return_data)
+    return jsonify(return_data)
+    
+if __name__=="__main__":
+    app.run(debug=True)
