@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #BACDDB;
+}
+
+.container {
+    height: 16rem;
+    width: 28rem;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #CE5959;
+}
+
+.mobile_no {
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 40px;
+    padding: 7px;
+    width: 12rem;
+    margin-top: 50px;
+    border-radius: 5px;
+    border: none;
+}
+
+.text {
+    margin-left: 20px;
+    font-size: 30px;
+    margin-top: 20px;
+    color: black;
+}
+
+.title {
+    font-size: 28px;
+    margin-left: 20px;
+    color: black;
+}
+
+#payment_options {
+    margin: 10px;
+    height: 40px;
+    padding: 7px;
+    width: 9.5rem;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    margin: 20px;
+    height: 2.2rem;
+    width: 8rem;
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+}
+
+button:hover {
+    background-color: azure;
+    border: 2px solid black;
+}
